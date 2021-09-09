@@ -1,19 +1,21 @@
 package fundconnext
 
 import (
-	log "github.com/sirupsen/logrus"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type APICallerConfig struct {
-	Timeout *time.Duration
+	Timeout     *time.Duration
 	ContentType string
-	Logger *log.Logger
+	Logger      *log.Logger
+	Proxy       *string
 }
 
 var (
-	DEMO_URL = "https://demo.fundconnext.com"
-	STAGING_URL = "https://stage.fundconnext.com"
+	DEMO_URL       = "https://demo.fundconnext.com"
+	STAGING_URL    = "https://stage.fundconnext.com"
 	PRODUCTION_URL = "https://www.fundconnext.com"
 )
 
@@ -22,7 +24,7 @@ type FCAuthentication struct {
 	SACode      string
 	SAId        string
 	Username    string
-	IssuedAt   int64
+	IssuedAt    int64
 	ExpiresAt   int64
 }
 
@@ -37,7 +39,7 @@ type FCConfiguration struct {
 	Password string
 	Timeout  time.Duration
 	Env      string
-	Logger *log.Logger
+	Logger   *log.Logger
 }
 
 func ToOptStr(str string) *string {
@@ -79,7 +81,7 @@ func (f *FundConnext) getUrl() string {
 func MakeAPICallerConfig(f *FundConnext) *APICallerConfig {
 	return &APICallerConfig{
 		Timeout: &f.cfg.Timeout,
-		Logger: f.cfg.Logger,
+		Logger:  f.cfg.Logger,
 	}
 }
 
@@ -96,7 +98,7 @@ func (f *FundConnext) reTokenize() error {
 		SAId:        token.Claims.SellingAgentId,
 		Username:    token.Claims.Username,
 		ExpiresAt:   token.Claims.ExpiresAt,
-		IssuedAt:   token.Claims.IssuedAt,
+		IssuedAt:    token.Claims.IssuedAt,
 	}
 	return nil
 }

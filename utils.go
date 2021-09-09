@@ -5,17 +5,50 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	log "github.com/sirupsen/logrus"
 	"io"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"os"
 	"reflect"
 	"strconv"
 	"strings"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
+type HTTPSetting struct {
+	RequestType  string
+	URL          string
+	Proxy        string
+	IsEnableCert bool
+	CertPath     string
+	Timeout      int64
+	Headers      map[string]string
+	Parameters   map[string]string
+	Body         io.Reader
+}
+
+func setProxy(setting *HTTPSetting) (*http.Transport, error) {
+	transport := &http.Transport{
+		MaxIdleConns:       10,
+		IdleConnTimeout:    30 * time.Second,
+		DisableCompression: true,
+	}
+
+	if setting.Proxy != "" {
+		path, err := url.Parse(setting.Proxy)
+
+		if err != nil {
+			return nil, err
+		}
+
+		transport.Proxy = http.ProxyURL(path)
+	}
+
+	return transport, nil
+}
 
 func ScanRowToStruct(data string, r interface{}) {
 	elem := reflect.ValueOf(r).Elem()
@@ -85,7 +118,16 @@ func CallFCAPI(env, token, method, fp string, body interface{}, cfg *APICallerCo
 	} else {
 		client.Timeout = *cfg.Timeout
 	}
-	url := fmt.Sprintf("%s%s",env,fp)
+	if cfg.Proxy != nil {
+		transport, err := setProxy(&HTTPSetting{
+			Proxy: *cfg.Proxy,
+		})
+		if err != nil {
+			return nil, err
+		}
+		client.Transport = transport
+	}
+	url := fmt.Sprintf("%s%s", env, fp)
 	var reqReader io.Reader
 	switch body.(type) {
 	case []byte:
@@ -103,7 +145,7 @@ func CallFCAPI(env, token, method, fp string, body interface{}, cfg *APICallerCo
 		cfg.Logger.Error("[Func CallFundconnextAPI] Error create new request failed", err)
 		return nil, err
 	}
-	cfg.Logger.Debugf("[Func CallFundconnextAPI] Debug call %s %s",method, url)
+	cfg.Logger.Debugf("[Func CallFundconnextAPI] Debug call %s %s", method, url)
 	contentType := "application/json"
 	if cfg.ContentType != "" {
 		contentType = cfg.ContentType
