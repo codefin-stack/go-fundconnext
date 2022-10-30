@@ -34,6 +34,10 @@ type FundConnext struct {
 	authentication *FCAuthentication
 }
 
+type IFundConnext interface {
+	APICall(method, url string, req interface{}) ([]byte, error)
+}
+
 type FCConfiguration struct {
 	Username string
 	Password string
