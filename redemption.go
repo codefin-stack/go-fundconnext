@@ -46,7 +46,7 @@ func (f *FundConnext) CreateRedemption(redemption RedemptionOrder) (*RedemptionO
 		return nil, err
 	}
 	// resp, err := CallFCAPI(f.token, "POST", url, body, cfg)
-	resp, err := f.APICall("POST", url, body)
+	resp, err := f.In.APICall("POST", url, body)
 	if err != nil {
 		return nil, err
 	}

@@ -22,12 +22,15 @@ type ExpectedAPICall struct {
 }
 
 func NewFundConnext(m MockFundConnext) *FundConnext {
-	return &FundConnext{
+	mock := &FundConnext{
 		Mockf: m,
 		FundConnext: fundconnext.New(&fundconnext.FCConfiguration{
 			Logger: logrus.New(),
 		}),
 	}
+
+	mock.In = mock
+	return mock
 }
 
 func (f *FundConnext) APICall(method, url string, req interface{}) ([]byte, error) {

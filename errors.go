@@ -1,9 +1,10 @@
 package fundconnext
 
 var (
-	UnAuthorizedError  = MakeFCError("E000", "Unauthorized access")
-	UnProcessableEntry = MakeFCError("EXXX", "Unprocessable entry")
-	LtfBalanceNotFound = MakeFCError("E339", "LTF Balance Not Found")
+	UnAuthorizedError     = MakeFCError("E000", "Unauthorized access")
+	UnProcessableEntry    = MakeFCError("EXXX", "Unprocessable entry")
+	LtfBalanceNotFound    = MakeFCError("E339", "LTF Balance Not Found")
+	UnSupportAdvanceOrder = MakeFCError("E274", "This fund does not support advance order. Please change effective date.")
 )
 
 type ErrMsg struct {

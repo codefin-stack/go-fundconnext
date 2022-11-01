@@ -13,23 +13,20 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestLTFRedeemableUnitInquiry(t *testing.T) {
+func TestCreateRedemption(t *testing.T) {
 	testTools := SetupSuite(t, SetupOptions{})
 	defer testTools.Teardown(t)
-	type input struct {
-		unitholderId string
-		fundCode     string
-	}
+
 	type expected struct {
 		Expected
 	}
 	suite := Testcase{
-		"3. LTF unit not found should return error not found": {
+		"001.Create LTF Redemption E274": {
 			Mock: &Mock{
 				FundConnext: mock.MockFundConnext{
 					APICall: &mock.ExpectedAPICall{
 						Error: func() error {
-							errResp := `{"errMsg":{"code":"E339","message":"LTF Balance Not Found"}}`
+							errResp := `{"errMsg":{"code":"E274","message":"This fund does not support advance order. Please change effective date."}}`
 							reader := io.NopCloser(strings.NewReader(errResp))
 							respBody, err := ioutil.ReadAll(reader)
 							if err != nil {
@@ -44,13 +41,10 @@ func TestLTFRedeemableUnitInquiry(t *testing.T) {
 					},
 				},
 			},
-			Input: input{
-				unitholderId: "user1",
-				fundCode:     "ASP-GLTF-T",
-			},
+			Input: fundconnext.RedemptionOrder{},
 			Expected: expected{
 				Expected: Expected{
-					Error: fundconnext.LtfBalanceNotFound,
+					Error: fundconnext.UnSupportAdvanceOrder,
 				},
 			},
 		},
@@ -60,9 +54,8 @@ func TestLTFRedeemableUnitInquiry(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			testTools := SetupTest(t, SetupOptions{Mock: tc.Mock})
 			defer testTools.Teardown(t)
-
-			input := tc.Input.(input)
-			_, err := testTools.FC.LTFRedeemableUnitInquiry(input.unitholderId, input.fundCode)
+			input := tc.Input.(fundconnext.RedemptionOrder)
+			_, err := testTools.FC.CreateRedemption(input)
 			expected := tc.Expected.(expected)
 			if expected.Error != nil {
 				require.Error(t, err)

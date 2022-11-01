@@ -29,6 +29,7 @@ type FCAuthentication struct {
 }
 
 type FundConnext struct {
+	In             IFundConnext
 	cfg            *FCConfiguration
 	token          string
 	authentication *FCAuthentication
@@ -155,5 +156,6 @@ func (f *FundConnext) Configure(cfg *FCConfiguration) {
 func New(cfg *FCConfiguration) *FundConnext {
 	fc := new(FundConnext)
 	fc.Configure(cfg)
+	fc.In = fc
 	return fc
 }
