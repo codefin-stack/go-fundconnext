@@ -19,7 +19,7 @@ type SuitabilityForm struct {
 	SuitNo1  *string `json:"suitNo1"`
 	SuitNo2  *string `json:"suitNo2"`
 	SuitNo3  *string `json:"suitNo3"`
-	SuitNo4  *string `json:"suitNo4"`
+	SuitNo4  []*string `json:"suitNo4"`
 	SuitNo5  *string `json:"suitNo5"`
 	SuitNo6  *string `json:"suitNo6"`
 	SuitNo7  *string `json:"suitNo7"`
