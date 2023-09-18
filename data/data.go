@@ -24,10 +24,10 @@ type FundProfileData struct {
 	FstLowBuyVal           *float64
 	NxtLowBuyVal           *float64
 	SellCutOffTime         string
-	LowSellVal             *float64
-	LowSellUnit            *float64
-	LowBalVal              *float64
-	LowBalUnit             *float64
+	LowSellVal             *float64 `fundconnext:"nullable"`
+	LowSellUnit            *float64 `fundconnext:"nullable"`
+	LowBalVal              *float64 `fundconnext:"nullable"`
+	LowBalUnit             *float64 `fundconnext:"nullable"`
 	SellSettlementDay      uint64
 	SwitchingSettlementDay *uint64
 	SwitchOutFlag          string
@@ -35,8 +35,8 @@ type FundProfileData struct {
 	FundClass              *string
 	BuyPeriodFlag          string
 	SellPeriodFlag         string
-	SwitchInPeriodFlag    *string
-	SwitchOutPeriodFlag   *string
+	SwitchInPeriodFlag     *string
+	SwitchOutPeriodFlag    *string
 	BuyPreOrderDay         float64
 	SellPreOrderDay        float64
 	SwitchPreOrderDay      float64
@@ -47,7 +47,7 @@ type FundProfileData struct {
 	DerivativesFlag        string
 	LagAllocationDay       uint64
 	SettlementHolidayFlag  string
-	HealthInsurance       string
+	HealthInsurance        string
 	PreviousFundCode       *string
 	InvestorAlert          *string
 	ISIN                   *string
@@ -86,7 +86,7 @@ type FeeData struct {
 	ActualFee     *float64
 	MinimumFee    *float64
 	Remark        *string
-	MaximumValue *float64
+	MaximumValue  *float64
 	Filler1       *string
 	Filler2       *string
 	Filler3       *string
