@@ -14,9 +14,10 @@ type APICallerConfig struct {
 }
 
 var (
-	DEMO_URL       = "https://demo.fundconnext.com"
+	DEMO_URL       = "https://lh-mock-api.codefin.dev/lh"
 	STAGING_URL    = "https://stage.fundconnext.com"
 	PRODUCTION_URL = "https://www.fundconnext.com"
+	MOCK_URL       = "http://mock-api:8085/lh"
 )
 
 type FCAuthentication struct {
@@ -79,6 +80,8 @@ func (f *FundConnext) getUrl() string {
 		return STAGING_URL
 	case "production":
 		return PRODUCTION_URL
+	case "mock-api":
+		return MOCK_URL
 	default:
 		return DEMO_URL
 	}

@@ -108,6 +108,7 @@ func ScanRowToStruct(data string, r interface{}) {
 //}
 
 func CallFCAPI(env, token, method, fp string, body interface{}, cfg *APICallerConfig) ([]byte, error) {
+	cfg.Logger.Infoln("[Funconnext:CallFCAPI] Called...")
 	client := http.Client{}
 	if cfg.Timeout == nil {
 		client.Timeout = time.Second * 10
@@ -167,7 +168,7 @@ func CallFCAPI(env, token, method, fp string, body interface{}, cfg *APICallerCo
 	if err != nil {
 		cfg.Logger.Warning("[Func CallFundconnextAPI] Error Marshal Request Header", err)
 	}
-	cfg.Logger.Debugf("[Func CallFundconnextAPI] Debug call %s %s %s %s", method, url, string(reqHeadersBytes), string(reqBody))
+	cfg.Logger.Debugf("[Funconnect:CallFundconnextAPI] Debug call Method: %s\n, Url: %s\n, Header: %s\n, Body: %s", method, url, string(reqHeadersBytes), string(reqBody))
 	respBody, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
