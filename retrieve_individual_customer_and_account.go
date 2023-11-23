@@ -58,7 +58,7 @@ type RetrievalIndividualCustomerProfileAndAccount struct {
 	ReferralPerson                 *string             `json:"referralPerson"`
 	ApplicationDate                string              `json:"applicationDate"`
 	IncomeSourceCountry            string              `json:"incomeSourceCountry"`
-	AcceptBy                       *string             `json:"acceptBy"`
+	AcceptBy                       *string             `json:"acceptedBy"`
 	OpenFundConnextFormFlag        string              `json:"openFundConnextFormFlag"`
 	Approved                       bool                `json:"approved"`
 	VulnerableFlag                 *bool               `json:"vulnerableFlag"`
