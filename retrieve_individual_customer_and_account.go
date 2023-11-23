@@ -20,7 +20,7 @@ type RetrievalIndividualCustomerProfileAndAccount struct {
 	Title                          string              `json:"title"`
 	TitleOther                     *string             `json:"titleOther"`
 	EnFirstName                    string              `json:"enFirstName"`
-	EnLastName                     string              `json:"EnLastName"`
+	EnLastName                     string              `json:"enLastName"`
 	ThFirstName                    string              `json:"thFirstName"`
 	ThLastName                     string              `json:"thLastName"`
 	BirthDate                      string              `json:"birthDate"`
@@ -30,10 +30,10 @@ type RetrievalIndividualCustomerProfileAndAccount struct {
 	Phone                          *string             `json:"phone"`
 	Fax                            *string             `json:"fax"`
 	MaritalStatus                  string              `json:"maritalStatus"`
-	Spouse                         interface{}         `json:"spouse"`
-	OccupationId                   uint64              `json:"occupationId"`
+	Spouse                         *SpouseDocument     `json:"spouse"`
+	OccupationId                   int                 `json:"occupationId"`
 	OccupationOther                *string             `json:"occupationOther"`
-	BusinessTypeId                 *uint64             `json:"businessTypeId"`
+	BusinessTypeId                 *int                `json:"businessTypeId"`
 	BusinessTypeOther              *string             `json:"businessTypeOther"`
 	MonthlyIncomeLevel             string              `json:"monthlyIncomeLevel"`
 	AssetValue                     *string             `json:"assetValue"`
@@ -49,17 +49,18 @@ type RetrievalIndividualCustomerProfileAndAccount struct {
 	PoliticalRelatedPersonPosition *string             `json:"politicalRelatedPersonPosition"`
 	CanAcceptFxRisk                bool                `json:"canAcceptFxRisk"`
 	CanAcceptDerivativeInvestment  bool                `json:"canAcceptDerivativeInvestment"`
-	SuitabilityRiskLevel           string              `json:"suitabilityRiskLevel"`
+	SuitabilityRiskLevel           int                 `json:"suitabilityRiskLevel"`
 	SuitabilityEvaluationDate      string              `json:"suitabilityEvaluationDate"`
 	Fatca                          bool                `json:"fatca"`
 	FatcaDeclarationDate           string              `json:"fatcaDeclarationDate"`
-	CddScore                       *float64            `json:"cddScore"`
+	CddScore                       *int                `json:"cddScore"`
 	CddDate                        *string             `json:"cddDate"`
 	ReferralPerson                 *string             `json:"referralPerson"`
 	ApplicationDate                string              `json:"applicationDate"`
 	IncomeSourceCountry            string              `json:"incomeSourceCountry"`
 	AcceptBy                       *string             `json:"acceptBy"`
 	OpenFundConnextFormFlag        string              `json:"openFundConnextFormFlag"`
+	Approved                       bool                `json:"approved"`
 	VulnerableFlag                 *bool               `json:"vulnerableFlag"`
 	VulnerableDetail               *string             `json:"vulnerableDetail"`
 	NdidFlag                       *bool               `json:"ndidFlag"`
@@ -71,10 +72,10 @@ type RetrievalIndividualCustomerProfileAndAccount struct {
 	ApprovedDate                   *string             `json:"approvedDate"`
 
 	// add from version 5
-	CrsPlaceOfBirthCountry                   *string     `json:"crsPlaceOfBirthCountry"`
-	CrsPlaceOfBirthCity                      *string     `json:"crsPlaceOfBirthCity"`
-	CrsTaxResidenceInCountriesOtherThanTheUs *bool       `json:"crsTaxResidenceInCountriesOtherThanTheUS"`
-	CrsDeclarationDate                       *string     `json:"crsDeclarationDate"`
+	CrsTaxResidenceInCountriesOtherThanTheUs bool        `json:"crsTaxResidenceInCountriesOtherThanTheUS"`
+	CrsPlaceOfBirthCountry                   string      `json:"crsPlaceOfBirthCountry"`
+	CrsPlaceOfBirthCity                      string      `json:"crsPlaceOfBirthCity"`
+	CrsDeclarationDate                       string      `json:"crsDeclarationDate"`
 	CrsDetails                               []CrsDetail `json:"crsDetails"`
 }
 
