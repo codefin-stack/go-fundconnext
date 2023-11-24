@@ -36,7 +36,7 @@ type RetrievalIndividualCustomerProfileAndAccount struct {
 	BusinessTypeId                 *int                `json:"businessTypeId"`
 	BusinessTypeOther              *string             `json:"businessTypeOther"`
 	MonthlyIncomeLevel             string              `json:"monthlyIncomeLevel"`
-	AssetValue                     *string             `json:"assetValue"`
+	AssetValue                     *float64            `json:"assetValue"`
 	IncomeSource                   string              `json:"incomeSource"`
 	IncomeSourceOther              *string             `json:"incomeSourceOther"`
 	IdentificationDocument         Address             `json:"identificationDocument"`
