@@ -114,7 +114,7 @@ func (f *FundConnext) reTokenize() error {
 }
 
 func (f *FundConnext) APICall(method, url string, req interface{}) ([]byte, error) {
-	if f.authentication == nil || !time.Now().Before(time.Unix(f.authentication.ExpiresAt, 0)) {
+	if f.authentication == nil || !time.Now().Before(time.Unix(f.authentication.ExpiresAt, 0).Add(time.Minute*-5)) {
 		f.cfg.Logger.Infoln("[Func APICall] Info Re-tokenized")
 		if err := f.reTokenize(); err != nil {
 			return nil, err
@@ -132,7 +132,7 @@ func (f *FundConnext) APICall(method, url string, req interface{}) ([]byte, erro
 }
 
 func (f *FundConnext) APICallFormData(method, url string, req interface{}) ([]byte, error) {
-	if f.authentication == nil || !time.Now().Before(time.Unix(f.authentication.ExpiresAt, 0)) {
+	if f.authentication == nil || !time.Now().Before(time.Unix(f.authentication.ExpiresAt, 0).Add(time.Minute*-5)) {
 		f.cfg.Logger.Infoln("[Func APICall] Info Re-tokenized")
 		if err := f.reTokenize(); err != nil {
 			return nil, err
