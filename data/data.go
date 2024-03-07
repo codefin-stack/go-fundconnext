@@ -184,10 +184,11 @@ type UnitholderMappingData struct {
 
 // BankAccountUnitholderData ...
 type BankAccountUnitholderData struct {
-	AccountID         string
-	AMCCode           string
-	UnitholderID      string
-	TransactionType   string
-	BankCode          string
-	BankAccountNumber string
+	AccountID              string
+	AMCCode                string
+	UnitholderID           string
+	TransactionType        string
+	BankCode               string
+	BankAccountNumber      string
+	DefaultFlagBankAccount string
 }
