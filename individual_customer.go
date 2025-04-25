@@ -16,18 +16,18 @@ type SpouseDocument struct {
 
 // SuitabilityForm Verified V4
 type SuitabilityForm struct {
-	SuitNo1  *string `json:"suitNo1"`
-	SuitNo2  *string `json:"suitNo2"`
-	SuitNo3  *string `json:"suitNo3"`
-	SuitNo4  *string `json:"suitNo4"`
-	SuitNo5  *string `json:"suitNo5"`
-	SuitNo6  *string `json:"suitNo6"`
-	SuitNo7  *string `json:"suitNo7"`
-	SuitNo8  *string `json:"suitNo8"`
-	SuitNo9  *string `json:"suitNo9"`
-	SuitNo10 *string `json:"suitNo10"`
-	SuitNo11 *string `json:"suitNo11"`
-	SuitNo12 *string `json:"suitNo12"`
+	SuitNo1  *int   `json:"suitNo1"`
+	SuitNo2  *int   `json:"suitNo2"`
+	SuitNo3  *int   `json:"suitNo3"`
+	SuitNo4  *[]int `json:"suitNo4"`
+	SuitNo5  *int   `json:"suitNo5"`
+	SuitNo6  *int   `json:"suitNo6"`
+	SuitNo7  *int   `json:"suitNo7"`
+	SuitNo8  *int   `json:"suitNo8"`
+	SuitNo9  *int   `json:"suitNo9"`
+	SuitNo10 *int   `json:"suitNo10"`
+	SuitNo11 *int   `json:"suitNo11"`
+	SuitNo12 *int   `json:"suitNo12"`
 }
 
 // Address Verified V4
