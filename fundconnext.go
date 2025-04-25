@@ -1,8 +1,10 @@
 package fundconnext
 
 import (
+	"context"
 	"time"
 
+	"github.com/machinebox/graphql"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -18,6 +20,7 @@ var (
 	STAGING_URL    = "https://stage.fundconnext.com"
 	PRODUCTION_URL = "https://www.fundconnext.com"
 	MOCK_URL       = "http://mock-api:8085/lh"
+	AMNET_URL      = "http://asset-distributor-service:8080/"
 )
 
 type FCAuthentication struct {
@@ -82,8 +85,10 @@ func (f *FundConnext) getUrl() string {
 		return PRODUCTION_URL
 	case "mock-api":
 		return MOCK_URL
+	case "amnet-api":
+		return AMNET_URL
 	default:
-		return DEMO_URL
+		return AMNET_URL
 	}
 }
 
@@ -125,6 +130,17 @@ func (f *FundConnext) APICall(method, url string, req interface{}) ([]byte, erro
 	cfg := MakeAPICallerConfig(f)
 	cfg.ContentType = "application/json"
 	resp, err := CallFCAPI(env, f.authentication.AccessToken, method, url, req, cfg)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (f *FundConnext) APICallAmnet(ctx context.Context, url string, req *graphql.Request) (interface{}, error) {
+	env := f.getUrl()
+	cfg := MakeAPICallerConfig(f)
+	cfg.ContentType = "application/json"
+	resp, err := CallAmnetApi(ctx, req, env, f.authentication.AccessToken, url, cfg)
 	if err != nil {
 		return nil, err
 	}

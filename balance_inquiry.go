@@ -1,8 +1,10 @@
 package fundconnext
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
+
+	"github.com/machinebox/graphql"
 )
 
 type BalanceInquiry struct {
@@ -23,15 +25,26 @@ type BalanceInquiryResults struct {
 	Result []BalanceInquiry `json:"result"`
 }
 
-func (f *FundConnext) BalanceInquiry(accountNo string) (*BalanceInquiryResults, error) {
-	f.cfg.Logger.Infoln("[Funconnext:BalanceInquiry] AccountNo: ", accountNo)
-	url := fmt.Sprintf("/api/account/balances?accountNo=%s", accountNo)
-	// out, err := CallFCAPI(f.token, "GET", url, make([]byte, 0), cfg)
-	out, err := f.APICall("GET", url, make([]byte, 0))
+func (f *FundConnext) BalanceInquiry(accountId string, req *graphql.Request) (*BalanceInquiryResults, error) {
+	f.cfg.Logger.Infoln("[Funconnext:BalanceInquiry] AccountId: ", accountId)
+
+	f.cfg.Logger.Warning("[AmnetAPI:BalanceInquiry] Call check balance inquiry to Amet!")
+	url := "api/account/balances"
+	// out, err := f.APICall("GET", url, make([]byte, 0))
+	// if err != nil {
+	// 	return nil, err
+	// }
+	out, err := f.APICallAmnet(context.Background(), url, req)
 	if err != nil {
 		return nil, err
 	}
+
+	// Convert the interface to a map
+	data := out.(map[string]interface{})
+
+	// Convert the map to JSON bytes again
+	jsonBytes, _ := json.Marshal(data)
 	var results *BalanceInquiryResults
-	json.Unmarshal(out, &results)
+	json.Unmarshal([]byte(jsonBytes), &results)
 	return results, nil
 }
