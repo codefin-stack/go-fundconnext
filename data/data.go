@@ -180,6 +180,7 @@ type UnitholderMappingData struct {
 	AMCCode      string
 	UnitholderID string
 	AccountType  string
+	Currency     string
 }
 
 // BankAccountUnitholderData ...
@@ -191,4 +192,6 @@ type BankAccountUnitholderData struct {
 	BankCode               string
 	BankAccountNumber      string
 	DefaultFlagBankAccount string
+	UnitholderType         string
+	Currency               string
 }
