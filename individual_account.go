@@ -13,6 +13,7 @@ type BankAccount struct {
 	BankAccountNo    string  `json:"bankAccountNo"`
 	Default          bool    `json:"default"`
 	FinnetCustomerNo *string `json:"finnetCustomerNo"`
+	Currency         string  `json:"currency,omitempty"`
 }
 
 type IndividualAccountDocument struct {
