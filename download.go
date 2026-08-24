@@ -13,7 +13,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/sanchaimac/go-amnet/data"
+	"github.com/codefin-stack/go-fundconnext/data"
 
 	"github.com/mitchellh/mapstructure"
 )

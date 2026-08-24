@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	mock "github.com/sanchaimac/go-amnet/tests/mocks"
+	mock "github.com/codefin-stack/go-fundconnext/tests/mocks"
 )
 
 type Mock struct {
