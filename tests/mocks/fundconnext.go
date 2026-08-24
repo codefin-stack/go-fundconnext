@@ -3,7 +3,7 @@ package mock
 import (
 	"log"
 
-	"github.com/sanchaimac/go-amnet"
+	"github.com/codefin-stack/go-fundconnext"
 	"github.com/sirupsen/logrus"
 )
 
