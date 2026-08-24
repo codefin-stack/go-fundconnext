@@ -5,8 +5,8 @@ import (
 	"os"
 	"path"
 
-	FC "github.com/codefin-stack/go-fundconnext"
 	godotenv "github.com/joho/godotenv"
+	FC "github.com/sanchaimac/go-amnet"
 	log "github.com/sirupsen/logrus"
 )
 

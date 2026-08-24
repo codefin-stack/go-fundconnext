@@ -2,6 +2,7 @@ package fundconnext
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -10,10 +11,13 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"path"
 	"reflect"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/machinebox/graphql"
 )
 
 type HTTPSetting struct {
@@ -198,6 +202,30 @@ func CallFCAPI(env, token, method, fp string, body interface{}, cfg *APICallerCo
 		return nil, &errMsg
 	}
 	return respBody, nil
+}
+
+func CallAmnetApi(ctx context.Context, req *graphql.Request, env, token, endPoint string, cfg *APICallerConfig) (responseData interface{}, err error) {
+	u, err := url.Parse(env)
+	if err != nil {
+		cfg.Logger.Infoln("[Funconnext:CallAmnetApi] Parse url error: ", err)
+		return nil, err
+	}
+	u.Path = path.Join(endPoint)
+	client := graphql.NewClient(u.Path)
+
+	contentType := "application/json"
+	if cfg.ContentType != "" {
+		contentType = cfg.ContentType
+	}
+	req.Header.Set("Content-Type", contentType)
+	req.Header.Add("X-Auth-Token", token)
+	// Perform the request
+	if err := client.Run(ctx, req, responseData); err != nil {
+		cfg.Logger.Infoln("[Funconnext:CallAmnetApi] Graphql client request error: ", err)
+		return nil, err
+	}
+
+	return
 }
 
 // fileExists checks if a file exists and is not a directory before we

@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/codefin-stack/go-fundconnext"
-	mock "github.com/codefin-stack/go-fundconnext/tests/mocks"
+	"github.com/sanchaimac/go-amnet"
+	mock "github.com/sanchaimac/go-amnet/tests/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
