@@ -97,7 +97,7 @@ func MakeAPICallerConfig(f *FundConnext) *APICallerConfig {
 
 func (f *FundConnext) reTokenize() error {
 	url := f.getUrl()
-	token, err := Login(url, f.cfg.Username, f.cfg.Password, f.cfg.Proxy)
+	token, err := LoginWithTimeout(url, f.cfg.Username, f.cfg.Password, f.cfg.Proxy, f.cfg.Timeout)
 	if err != nil {
 		return err
 	}

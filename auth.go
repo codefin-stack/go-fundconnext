@@ -26,8 +26,16 @@ type AuthClaims struct {
 	Username         string `json:"username"`
 }
 
+const defaultAuthTimeout = 10 * time.Second
+
 func Login(env, username, password, proxy string) (*AuthResponse, error) {
-	timeout := time.Duration(10 * time.Second)
+	return LoginWithTimeout(env, username, password, proxy, defaultAuthTimeout)
+}
+
+func LoginWithTimeout(env, username, password, proxy string, timeout time.Duration) (*AuthResponse, error) {
+	if timeout <= 0 {
+		timeout = defaultAuthTimeout
+	}
 	client := http.Client{
 		Timeout: timeout,
 	}
