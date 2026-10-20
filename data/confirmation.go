@@ -126,4 +126,17 @@ type AllottedTransactionData struct {
 	Filler4                            *string
 	Filler5                            *string
 	Filler6                            *string
+	// CR1911 DRAFT (columns 61-70, layout NOT verified against a real V3.0 file). Every field is a
+	// *string on purpose: a wrong guess then cannot make the whole file fail to parse. The
+	// importer converts the numeric ones with a tolerant parser.
+	FeeFCD             *string
+	WithholdingTaxFCD  *string
+	VATFCD             *string
+	FXRate             *string
+	FXRateDate         *string
+	Currency           *string
+	Filler7            *string
+	Filler8            *string
+	BrokerageFeeFCD    *string
+	BrokerageFeeVATFCD *string
 }
