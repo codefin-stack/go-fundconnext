@@ -17,6 +17,7 @@ type BalanceInquiry struct {
 	AVGCost       float64 `json:"avgCost"`
 	NAV           float64 `json:"nav"`
 	NAVDate       string  `json:"navDate"`
+	CostAmount    float64 `json:"costAmount"`
 }
 
 type BalanceInquiryResults struct {

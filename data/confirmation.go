@@ -32,6 +32,17 @@ type UnitholderBalanceData struct {
 	AverageCost          float64
 	NAV                  float64
 	NAVDate              string
+	CostAmount           float64
+	Filler1              *string
+	Filler2              *string
+	Filler3              *string
+	Filler4              *string
+	Filler5              *string
+	Filler6              *string
+	Filler7              *string
+	Filler8              *string
+	Filler9              *string
+	Filler10             *string
 }
 
 // UnitholderBalanceLTFData ...
@@ -91,7 +102,7 @@ type AllottedTransactionData struct {
 	AllotmentDate                      *string
 	AllottedNAV                        *float64
 	AllottedAmount                     *float64
-	AllottedUnit                        *float64
+	AllottedUnit                       *float64
 	Fee                                *float64
 	WithholdingTax                     *float64
 	VAT                                *float64
