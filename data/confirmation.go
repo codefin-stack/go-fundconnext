@@ -32,6 +32,17 @@ type UnitholderBalanceData struct {
 	AverageCost          float64
 	NAV                  float64
 	NAVDate              string
+	CostAmount           float64
+	Filler1              *string
+	Filler2              *string
+	Filler3              *string
+	Filler4              *string
+	Filler5              *string
+	Filler6              *string
+	Filler7              *string
+	Filler8              *string
+	Filler9              *string
+	Filler10             *string
 }
 
 // UnitholderBalanceLTFData ...
@@ -91,7 +102,7 @@ type AllottedTransactionData struct {
 	AllotmentDate                      *string
 	AllottedNAV                        *float64
 	AllottedAmount                     *float64
-	AllottedUnit                        *float64
+	AllottedUnit                       *float64
 	Fee                                *float64
 	WithholdingTax                     *float64
 	VAT                                *float64
@@ -115,4 +126,17 @@ type AllottedTransactionData struct {
 	Filler4                            *string
 	Filler5                            *string
 	Filler6                            *string
+	// CR1911 DRAFT (columns 61-70, layout NOT verified against a real V3.0 file). Every field is a
+	// *string on purpose: a wrong guess then cannot make the whole file fail to parse. The
+	// importer converts the numeric ones with a tolerant parser.
+	FeeFCD             *string
+	WithholdingTaxFCD  *string
+	VATFCD             *string
+	FXRate             *string
+	FXRateDate         *string
+	Currency           *string
+	Filler7            *string
+	Filler8            *string
+	BrokerageFeeFCD    *string
+	BrokerageFeeVATFCD *string
 }
