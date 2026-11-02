@@ -52,6 +52,23 @@ type FundProfileData struct {
 	InvestorAlert          *string
 	ISIN                   *string
 	LowBalCondition        *string
+	// CR1911: V4.0 file has 100 columns. Columns 45-58 are placeholders (layout not received from
+	// FCN yet) so Currency lands on column 59; columns 60-100 are not read.
+	Col45    string
+	Col46    string
+	Col47    string
+	Col48    string
+	Col49    string
+	Col50    string
+	Col51    string
+	Col52    string
+	Col53    string
+	Col54    string
+	Col55    string
+	Col56    string
+	Col57    string
+	Col58    string
+	Currency string // ISO code (THB, USD, EUR); empty in files older than V4.0
 }
 
 // SwitchingMatrixData ...
